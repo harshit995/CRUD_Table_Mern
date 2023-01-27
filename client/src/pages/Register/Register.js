@@ -91,6 +91,7 @@ const Register = () => {
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
+                  value={inputdata.fname}
                   onChange={setInputValue}
                   type="text"
                   name="fname"
@@ -99,6 +100,7 @@ const Register = () => {
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
+                  value={inputdata.lname}
                   onChange={setInputValue}
                   type="text"
                   name="lname"
@@ -107,6 +109,7 @@ const Register = () => {
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
+                  value={inputdata.email}
                   onChange={setInputValue}
                   type="email"
                   name="email"
@@ -115,6 +118,7 @@ const Register = () => {
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Mobile</Form.Label>
                 <Form.Control
+                  value={inputdata.mobile}
                   onChange={setInputValue}
                   type="text"
                   name="mobile"
@@ -140,7 +144,11 @@ const Register = () => {
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Select your Status</Form.Label>
-                <Select options={options} onChange={setStatusValue} />
+                <Select
+                  options={options}
+                  value={status}
+                  onChange={setStatusValue}
+                />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Select Your Profile</Form.Label>
@@ -153,6 +161,7 @@ const Register = () => {
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Enter Your Location</Form.Label>
                 <Form.Control
+                  value={inputdata.location}
                   onChange={setInputValue}
                   type="text"
                   name="location"
