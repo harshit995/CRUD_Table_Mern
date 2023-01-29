@@ -118,14 +118,14 @@ const Home = () => {
                     label={`Active`}
                     name="status"
                     value={"Active"}
-                    // onChange={(e) => setStatus(e.target.value)}
+                  // onChange={(e) => setStatus(e.target.value)}
                   />
                   <Form.Check
                     type={"radio"}
                     label={`InActive`}
                     name="status"
                     value={"InActive"}
-                    // onChange={(e) => setStatus(e.target.value)}
+                  // onChange={(e) => setStatus(e.target.value)}
                   />
                 </div>
               </div>
