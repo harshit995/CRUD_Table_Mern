@@ -83,7 +83,7 @@ const Register = () => {
         <h2 className="text-center mt-1">Registeration</h2>
         <Card className="shadow mt-3 p-3">
           <div className="profile_div text-center">
-            <img src={preview ? preview : "./man.png"} alt="img" />
+            <img src={preview ? preview : "/man.png"} alt="img" />
           </div>
 
           <Form>

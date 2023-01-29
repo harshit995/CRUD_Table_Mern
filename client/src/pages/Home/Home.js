@@ -1,19 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./home.css";
-import Card from "react-bootstrap/Card";
+
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
+import Tables from "../../components/Tables/Tables";
 
-import Row from "react-bootstrap/Row";
+import Spiner from "../../components/Spiner/Spiner";
+
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const [showspin, setShowSpin] = useState(true);
+
   const navigate = useNavigate();
 
   const adduser = () => {
     navigate("/register");
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowSpin(false);
+    }, 1000);
+  }, []);
+
   return (
     <>
       <div className="container">
@@ -121,6 +132,7 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {showspin ? <Spiner /> : <Tables />}
       </div>
     </>
   );
