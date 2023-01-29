@@ -1,9 +1,11 @@
-const express = require("express")
-const router = express.Router();
-const controllers = require("../Controllers/usersControllers")
+const express = require("express");
+const router = new express.Router();
+const controllers = require("../Controllers/usersControllers");
+const upload = require("../multerconfig/storageConfig")
 
-router.post('/user/register', controllers.userpost)
 
+// routes
+router.post("/user/register", upload.single("user_profile"), controllers.userpost);
 
 
 module.exports = router;
