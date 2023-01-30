@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unquie: true,
         validate(value) {
             if (!validator.isEmail(value)) {
                 throw Error("Not Valid Email")
@@ -25,9 +24,6 @@ const userSchema = new mongoose.Schema({
     mobile: {
         type: String,
         required: true,
-        unique: true,
-        minlength: 10,
-        maxlength: 10
     },
     gender: {
         type: String,

@@ -7,7 +7,7 @@ import Select from 'react-select';
 import Spiner from "../../components/Spiner/Spiner"
 import { registerfunc } from "../../services/Apis"
 import { ToastContainer, toast } from "react-toastify"
-// import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import 'react-toastify/dist/ReactToastify.css';
 import "./register.css"
 // import { addData } from '../../components/context/ContextProvider';
@@ -70,8 +70,6 @@ const Register = () => {
       toast.error("Enter Valid Email !")
     } else if (mobile === "") {
       toast.error("Mobile is Required !")
-    } else if (mobile.length > 10) {
-      toast.error("Enter Valid Mobile!f")
     } else if (gender === "") {
       toast.error("Gender is Required !")
     } else if (status === "") {
@@ -124,7 +122,7 @@ const Register = () => {
               <img src={preview ? preview : "/man.png"} alt="img" />
             </div>
 
-            <Form>
+            <Form method="POST">
               <Row>
                 <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                   <Form.Label>First name</Form.Label>
@@ -171,7 +169,7 @@ const Register = () => {
                   <Form.Label>Enter Your Location</Form.Label>
                   <Form.Control type="text" name='location' value={inputdata.location} onChange={setInputValue} placeholder='Enter Your Location' />
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={submitUserData}>
+                <Button navigate="/" variant="primary" type="submit" onClick={submitUserData}>
                   Submit
                 </Button>
               </Row>
