@@ -23,16 +23,16 @@ const Register = () => {
     location: ""
   });
 
-  const [status, setStatus] = useState("Active");
+  const [activity, setActivity] = useState("Active");
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState("");
   const [showspin, setShowSpin] = useState(true);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // const { useradd, setUseradd } = useContext(addData);
 
-  // status optios
+  // activity optios
   const options = [
     { value: 'Active', label: 'Active' },
     { value: 'InActive', label: 'InActive' },
@@ -44,9 +44,9 @@ const Register = () => {
     setInputData({ ...inputdata, [name]: value })
   }
 
-  // status set
-  const setStatusValue = (e) => {
-    setStatus(e.value)
+  // activity set
+  const setActivityValue = (e) => {
+    setActivity(e.value)
   }
 
   // profile set
@@ -72,14 +72,13 @@ const Register = () => {
       toast.error("Mobile is Required !")
     } else if (gender === "") {
       toast.error("Gender is Required !")
-    } else if (status === "") {
-      toast.error("Status is Required !")
+    } else if (activity === "") {
+      toast.error("activity is Required !")
     } else if (image === "") {
       toast.error("Prfile is Required !")
     } else if (location === "") {
       toast.error("location is Required !")
     } else {
-      console.log(image);
 
       const data = new FormData();
       data.append("fname", fname)
@@ -87,7 +86,7 @@ const Register = () => {
       data.append("email", email)
       data.append("mobile", mobile)
       data.append("gender", gender)
-      data.append("status", status)
+      data.append("activity", activity)
       data.append("user_profile", image)
       data.append("location", location)
 
@@ -96,7 +95,25 @@ const Register = () => {
       }
 
       const response = await registerfunc(data, config);
-      console.log(response)
+      console.log(response.status)
+
+      if (response.status === 200) {
+        setInputData({
+          ...inputdata,
+          fname: "",
+          lname: "",
+          email: "",
+          mobile: "",
+          gender: "",
+          location: ""
+        });
+        setActivity("");
+        setImage("");
+        navigate('/')
+      }
+      else {
+        toast.error("Form not submitted..")
+      }
     }
 
   }
@@ -158,8 +175,8 @@ const Register = () => {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
-                  <Form.Label>Select Your Status</Form.Label>
-                  <Select options={options} onChange={setStatusValue} />
+                  <Form.Label>Select Your Activity</Form.Label>
+                  <Select options={options} onChange={setActivityValue} />
                 </Form.Group>
                 <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                   <Form.Label>Select Your Profile</Form.Label>

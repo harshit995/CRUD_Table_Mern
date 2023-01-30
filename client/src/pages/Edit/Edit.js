@@ -17,11 +17,11 @@ const Edit = () => {
     location: "",
   });
 
-  const [status, setStatus] = useState("Active");
+  const [activity, setActivity] = useState("Active");
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState("");
 
-  //status options
+  //Activity options
   const options = [
     { value: "Active", label: "Active" },
     { value: "InActive", label: "InActive" },
@@ -34,9 +34,9 @@ const Edit = () => {
     setInputdata({ ...inputdata, [name]: value });
   };
 
-  // status set
-  const setStatusValue = (e) => {
-    setStatus(e.value);
+  // Activity set
+  const setActivityValue = (e) => {
+    setActivity(e.value);
   };
 
   //profile
@@ -61,8 +61,6 @@ const Edit = () => {
       toast.error("All fields are required");
     } else if (!email.includes("@")) {
       toast.error("Enter Valid Email");
-    } else if (mobile.length > 10) {
-      toast.error("Enter Valid Mobile number");
     } else {
       toast.success("Registeration is successfully done!");
     }
@@ -140,11 +138,11 @@ const Edit = () => {
                 />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
-                <Form.Label>Select your Status</Form.Label>
+                <Form.Label>Select your Activity</Form.Label>
                 <Select
                   options={options}
-                  value={status}
-                  onChange={setStatusValue}
+                  value={activity}
+                  onChange={setActivityValue}
                 />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">

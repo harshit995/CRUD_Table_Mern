@@ -35,7 +35,7 @@ const Profile = () => {
                 <span>Agra,India</span>
               </h4>
               <h4>
-                Status&nbsp;:-
+                Activity&nbsp;:-
                 <span>Active</span>
               </h4>
               <h4>

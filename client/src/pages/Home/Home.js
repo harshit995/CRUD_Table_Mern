@@ -50,7 +50,7 @@ const Home = () => {
               </Button>
             </div>
           </div>
-          {/* export,gender,status  */}
+          {/* export,gender,activity  */}
 
           <div className="filter_div mt-5 d-flex justify-content-between flex-wrap">
             <div className="export_csv p-3">
@@ -100,32 +100,32 @@ const Home = () => {
               </Dropdown>
             </div>
 
-            {/* by status */}
-            <div className="filter_status">
-              <div className="status">
-                <h3>Filter By Status</h3>
-                <div className="status_radio d-flex justify-content-between flex-wrap">
+            {/* by activity */}
+            <div className="filter_activity">
+              <div className="activity">
+                <h3>Filter By Activity</h3>
+                <div className="activity_radio d-flex justify-content-between flex-wrap">
                   <Form.Check
                     type={"radio"}
                     label={`All`}
-                    name="status"
+                    name="activity"
                     value={"All"}
-                    // onChange={(e) => setStatus(e.target.value)}
+                    // onChange={(e) => setactivity(e.target.value)}
                     defaultChecked
                   />
                   <Form.Check
                     type={"radio"}
                     label={`Active`}
-                    name="status"
+                    name="activity"
                     value={"Active"}
-                  // onChange={(e) => setStatus(e.target.value)}
+                  // onChange={(e) => setactivity(e.target.value)}
                   />
                   <Form.Check
                     type={"radio"}
                     label={`InActive`}
-                    name="status"
+                    name="activity"
                     value={"InActive"}
-                  // onChange={(e) => setStatus(e.target.value)}
+                  // onChange={(e) => setactivity(e.target.value)}
                   />
                 </div>
               </div>
