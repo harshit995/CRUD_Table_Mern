@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Card from "react-bootstrap/Card"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import 'react-toastify/dist/ReactToastify.css';
 import "./register.css"
-// import { addData } from '../../components/context/ContextProvider';
+import { addData } from '../../components/context/ContextProvider';
 
 const Register = () => {
 
@@ -30,7 +30,7 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  // const { useradd, setUseradd } = useContext(addData);
+  const { useradd, setUseradd } = useContext(addData);
 
   // activity optios
   const options = [
@@ -109,7 +109,9 @@ const Register = () => {
         });
         setActivity("");
         setImage("");
+        setUseradd(response.data)
         navigate('/')
+
       }
       else {
         toast.error("Form not submitted..")
