@@ -5,6 +5,7 @@ import { BASE_URL } from "../../services/helper";
 import Row from "react-bootstrap/Row";
 import { useParams } from "react-router-dom";
 import { singleuserget } from "../../services/Apis";
+import moment from "moment"
 
 const Profile = () => {
   const [userprofile, setUserprofile] = useState({});
@@ -36,34 +37,34 @@ const Profile = () => {
               </div>
             </Row>
             <div className="text-center">
-              <h3>{userprofile.fname}</h3>
+              <h3>{userprofile.fname + " " + userprofile.lname}</h3>
               <h4>
                 <i class="fa-solid fa-envelope"></i>&nbsp;:-
                 <span>{userprofile.email}</span>
               </h4>
               <h5>
                 <i class="fa-solid fa-mobile"></i>&nbsp;:-
-                <span>1234567890</span>
+                <span>{userprofile.mobile}</span>
               </h5>
               <h4>
                 <i class="fa-solid fa-venus-double"></i>&nbsp;:-
-                <span>Male/Female</span>
+                <span>{userprofile.gender}</span>
               </h4>
               <h4>
                 <i class="fa-solid fa-location-crosshairs"></i>&nbsp;:-
-                <span>Agra,India</span>
+                <span>{userprofile.location}</span>
               </h4>
               <h4>
                 Activity&nbsp;:-
-                <span>Active</span>
+                <span>{userprofile.activity}</span>
               </h4>
               <h4>
                 <i class="fa-solid fa-calendar-days"></i> Date created&nbsp;:-
-                <span> 2023-01-28</span>
+                <span> {moment(userprofile.datecreated).format("DD - MM - YYYY")}</span>
               </h4>
               <h4>
                 <i class="fa-solid fa-calendar-days"></i> Date Updated&nbsp;:-
-                <span> </span>
+                <span> {userprofile.dateupdated}</span>
               </h4>
             </div>
           </Card.Body>

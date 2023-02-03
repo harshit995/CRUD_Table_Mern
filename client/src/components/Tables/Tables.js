@@ -64,7 +64,7 @@ const Tables = ({ userdata }) => {
                               </Dropdown.Toggle>
                               <Dropdown.Menu>
                                 <Dropdown.Item>
-                                  <NavLink to={`/userprofile/${element._id}`}>
+                                  <NavLink className="text-decoration-none" to={`/userprofile/${element._id}`} >
                                     <i
                                       class="fa-solid fa-eye"
                                       style={{ color: "blue" }}
@@ -74,11 +74,13 @@ const Tables = ({ userdata }) => {
 
                                 </Dropdown.Item>
                                 <Dropdown.Item>
-                                  <i
-                                    class="fa-solid fa-pen"
-                                    style={{ color: "green" }}
-                                  ></i>
-                                  <span> Edit</span>
+                                  <NavLink className="text-decoration-none" to={`/edit/${element._id}`} >
+                                    <i
+                                      class="fa-solid fa-pen"
+                                      style={{ color: "green" }}
+                                    ></i>
+                                    <span> Edit</span>
+                                  </NavLink>
                                 </Dropdown.Item>
                                 <Dropdown.Item>
                                   <i
