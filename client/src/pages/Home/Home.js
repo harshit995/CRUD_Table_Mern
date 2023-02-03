@@ -6,13 +6,14 @@ import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
 import Tables from "../../components/Tables/Tables";
 
-import Spiner from "../../components/Spiner/Spiner";
+
 
 import { useNavigate } from "react-router-dom";
 import { addData } from "../../components/context/ContextProvider";
+import { usergetfunc } from "../../services/Apis";
 
 const Home = () => {
-  const [showspin, setShowSpin] = useState(true);
+  const [userdata, setUserdata] = useState("")
 
   const { useradd, setUseradd } = useContext(addData);
 
@@ -22,10 +23,23 @@ const Home = () => {
     navigate("/register");
   };
 
+  const userGet = async () => {
+    const response = await usergetfunc();
+    // console.log(response)
+
+    if (response.status === 200) {
+      setUserdata(response.data);
+    } else {
+      console.log("error for get user..")
+    }
+
+  }
+
   useEffect(() => {
-    setTimeout(() => {
-      setShowSpin(false);
-    }, 1000);
+    userGet();
+    // setTimeout(() => {
+    //   setShowSpin(false);
+    // }, 1000);
   }, []);
 
   return (
@@ -138,7 +152,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-        {showspin ? <Spiner /> : <Tables />}
+        <Tables
+          userdata={userdata}
+        />
       </div>
     </>
   );

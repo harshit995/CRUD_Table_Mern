@@ -1,6 +1,7 @@
 const users = require("../models/userSchema")
 const moment = require("moment");
 
+//register user
 exports.userpost = async (req, res) => {
     const file = req.file.filename;
     const { fname, lname, email, mobile, gender, location, activity } = req.body;
@@ -31,3 +32,27 @@ exports.userpost = async (req, res) => {
         console.log("catch block error")
     }
 };
+
+//user get
+exports.userget = async (req, res) => {
+    try {
+        const usersdata = await users.find();
+        res.status(200).json(usersdata)
+    } catch (error) {
+        res.status(401).json(error)
+    }
+}
+
+//single user get
+exports.singleuserget = async (req, res) => {
+    const { id } = req.params;
+    try {
+        // console.log(params);
+        const userdata = await users.findOne({ _id: id })
+        // console.log(id);
+        res.status(200).json(userdata)
+    }
+    catch (error) {
+        res.status(401).json(error)
+    }
+}

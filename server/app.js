@@ -10,6 +10,7 @@ require("./db/conn")
 app.use(cors());
 app.use(express.json());
 app.use(router);
+app.use("/uploads", express.static("./uploads"))
 
 app.listen(PORT, () => {
   console.log(`Application running on ${PORT}`);

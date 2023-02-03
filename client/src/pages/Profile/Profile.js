@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./profile.css";
 import Card from "react-bootstrap/Card";
-
+import { BASE_URL } from "../../services/helper";
 import Row from "react-bootstrap/Row";
+import { useParams } from "react-router-dom";
+import { singleuserget } from "../../services/Apis";
+
 const Profile = () => {
+  const [userprofile, setUserprofile] = useState({});
+  const { id } = useParams();
+
+  const userprofileget = async () => {
+    const response = await singleuserget(id);
+    if (response.status === 200) {
+      setUserprofile(response.data);
+    }
+    else {
+      console.log("error")
+    }
+  }
+  useEffect(() => {
+    userprofileget();
+  }, [id])
+
   return (
     <>
       <div className="container">
@@ -12,15 +31,15 @@ const Profile = () => {
             <Row>
               <div className="col">
                 <div className="card-profile-stats d-flex justify-content-center">
-                  <img src="/man.png" alt="img" />
+                  <img src={`${BASE_URL}/uploads/${userprofile.profile}`} alt="img" />
                 </div>
               </div>
             </Row>
             <div className="text-center">
-              <h3>Harshit Gupta</h3>
+              <h3>{userprofile.fname}</h3>
               <h4>
                 <i class="fa-solid fa-envelope"></i>&nbsp;:-
-                <span>gharshit89@gmail.com</span>
+                <span>{userprofile.email}</span>
               </h4>
               <h5>
                 <i class="fa-solid fa-mobile"></i>&nbsp;:-
