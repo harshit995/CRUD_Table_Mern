@@ -9,13 +9,15 @@ import Tables from "../../components/Tables/Tables";
 
 
 import { useNavigate } from "react-router-dom";
-import { addData } from "../../components/context/ContextProvider";
+import { addData, updateData } from "../../components/context/ContextProvider";
 import { usergetfunc } from "../../services/Apis";
 
 const Home = () => {
   const [userdata, setUserdata] = useState("")
 
   const { useradd, setUseradd } = useContext(addData);
+
+  const { update, setUpdate } = useContext(updateData)
 
   const navigate = useNavigate();
 
@@ -46,6 +48,9 @@ const Home = () => {
     <>
       {
         useradd ? <Alert variant="success" onClose={() => setUseradd("")} dismissible>{useradd.fname.toUpperCase()} Successfully Added..</Alert> : ""
+      }
+      {
+        update ? <Alert variant="primary" onClose={() => setUpdate("")} dismissible>{update.fname.toUpperCase()} Successfully updated..</Alert> : ""
       }
       <div className="container">
         <div className="main_div">

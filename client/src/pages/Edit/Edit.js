@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./edit.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -6,8 +6,10 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
-import { useParams } from "react-router-dom";
-import { singleuserget } from "../../services/Apis";
+import { useNavigate, useParams } from "react-router-dom";
+import { editfunc, singleuserget } from "../../services/Apis";
+import { BASE_URL } from "../../services/helper";
+import { updateData } from "../../components/context/ContextProvider";
 
 const Edit = () => {
   const [inputdata, setInputdata] = useState({
@@ -21,11 +23,12 @@ const Edit = () => {
   console.log(inputdata)
 
   const [activity, setActivity] = useState("Active");
+  const [imgdata, setImgdata] = useState("");
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState("");
+  const { update, setUpdate } = useContext(updateData);
 
-  console.log(preview)
-
+  const navigate = useNavigate();
 
 
 
@@ -62,6 +65,8 @@ const Edit = () => {
 
       setInputdata(response.data)
       setActivity(response.data.activity)
+      setImgdata(response.data.profile)
+
     } else {
       console.log("error")
     }
@@ -69,7 +74,7 @@ const Edit = () => {
 
 
   //submit user data
-  const submitUserData = (e) => {
+  const submitUserData = async (e) => {
     e.preventDefault();
 
     const { fname, lname, email, mobile, gender, location } = inputdata;
@@ -86,13 +91,36 @@ const Edit = () => {
     } else if (!email.includes("@")) {
       toast.error("Enter Valid Email");
     } else {
-      toast.success("Registeration is successfully done!");
+      const data = new FormData();
+      data.append("fname", fname)
+      data.append("lname", lname)
+      data.append("email", email)
+      data.append("mobile", mobile)
+      data.append("gender", gender)
+      data.append("activity", activity)
+      data.append("user_profile", image || imgdata)
+      data.append("location", location)
+
+      const config = {
+        "Content-Type": "multipart/form-data"
+      }
+
+      const response = await editfunc(id, data, config)
+
+      if (response.status === 200) {
+        setUpdate(response.data)
+        navigate('/')
+
+      }
     }
   };
 
+  useEffect(() => {
+    userProfileget();
+  }, [id])
   //setpreview
   useEffect(() => {
-    userProfileget()
+    setImgdata("")
     if (image) {
       setPreview(URL.createObjectURL(image));
     }
@@ -103,7 +131,7 @@ const Edit = () => {
         <h2 className="text-center mt-1">Update Your Details</h2>
         <Card className="shadow mt-3 p-3">
           <div className="profile_div text-center">
-            <img src={preview ? preview : "/man.png"} alt="img" />
+            <img src={image ? preview : `${BASE_URL}/uploads/${imgdata}`} alt="img" />
           </div>
 
           <Form>
