@@ -9,19 +9,21 @@ import moment from "moment"
 
 const Profile = () => {
   const [userprofile, setUserprofile] = useState({});
-  const { id } = useParams();
 
-  const userprofileget = async () => {
+  const { id } = useParams();
+  const userProfileget = async () => {
+
     const response = await singleuserget(id);
+
     if (response.status === 200) {
-      setUserprofile(response.data);
-    }
-    else {
+      setUserprofile(response.data)
+    } else {
       console.log("error")
     }
   }
+
   useEffect(() => {
-    userprofileget();
+    userProfileget();
   }, [id])
 
   return (
