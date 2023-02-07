@@ -6,6 +6,8 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
+import { useParams } from "react-router-dom";
+import { singleuserget } from "../../services/Apis";
 
 const Edit = () => {
   const [inputdata, setInputdata] = useState({
@@ -16,10 +18,16 @@ const Edit = () => {
     gender: "",
     location: "",
   });
+  console.log(inputdata)
 
   const [activity, setActivity] = useState("Active");
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState("");
+
+  console.log(preview)
+
+
+
 
   //Activity options
   const options = [
@@ -43,6 +51,22 @@ const Edit = () => {
   const setprofile = (e) => {
     setImage(e.target.files[0]);
   };
+
+  ///get id 
+  const { id } = useParams();
+  const userProfileget = async () => {
+
+    const response = await singleuserget(id);
+
+    if (response.status === 200) {
+
+      setInputdata(response.data)
+      setActivity(response.data.activity)
+    } else {
+      console.log("error")
+    }
+  }
+
 
   //submit user data
   const submitUserData = (e) => {
@@ -68,6 +92,7 @@ const Edit = () => {
 
   //setpreview
   useEffect(() => {
+    userProfileget()
     if (image) {
       setPreview(URL.createObjectURL(image));
     }
@@ -126,6 +151,7 @@ const Edit = () => {
                   label={"Male"}
                   name="gender"
                   value={"Male"}
+                  checked={inputdata.gender === "Male" ? true : false}
                   onChange={setInputValue}
                 />
 
@@ -134,6 +160,7 @@ const Edit = () => {
                   label={"Female"}
                   name="gender"
                   value={"Female"}
+                  checked={inputdata.gender === "Female" ? true : false}
                   onChange={setInputValue}
                 />
               </Form.Group>
@@ -141,7 +168,7 @@ const Edit = () => {
                 <Form.Label>Select your Activity</Form.Label>
                 <Select
                   options={options}
-                  value={activity}
+                  defaultValue={activity}
                   onChange={setActivityValue}
                 />
               </Form.Group>
