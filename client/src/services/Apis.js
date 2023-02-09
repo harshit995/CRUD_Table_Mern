@@ -16,3 +16,7 @@ export const singleuserget = async (id) => {
 export const editfunc = async (id, data, header) => {
     return await commonrequest("PUT", `${BASE_URL}/user/edit/${id}`, data, header);
 }
+
+export const deletefunc = async (id) => {
+    return await commonrequest("DELETE", `${BASE_URL}/user/delete/${id}`, {});
+}

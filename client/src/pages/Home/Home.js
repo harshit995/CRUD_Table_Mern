@@ -4,20 +4,23 @@ import Alert from 'react-bootstrap/Alert';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
+import { toast } from "react-toastify";
 import Tables from "../../components/Tables/Tables";
 
 
 
 import { useNavigate } from "react-router-dom";
-import { addData, updateData } from "../../components/context/ContextProvider";
-import { usergetfunc } from "../../services/Apis";
+import { addData, dltdata, updateData } from "../../components/context/ContextProvider";
+import { deletefunc, usergetfunc } from "../../services/Apis";
 
 const Home = () => {
-  const [userdata, setUserdata] = useState("")
+  const [userdata, setUserdata] = useState("");
 
   const { useradd, setUseradd } = useContext(addData);
 
-  const { update, setUpdate } = useContext(updateData)
+  const { update, setUpdate } = useContext(updateData);
+
+  const { deletedata, setDeletedata } = useContext(dltdata);
 
   const navigate = useNavigate();
 
@@ -37,6 +40,17 @@ const Home = () => {
 
   }
 
+  //user delete
+  const deleteuser = async (id) => {
+    const response = await deletefunc(id);
+    if (response.status === 200) {
+      userGet();
+      setDeletedata(response.data)
+    }
+    else {
+      toast.error("error")
+    }
+  }
   useEffect(() => {
     userGet();
     // setTimeout(() => {
@@ -51,6 +65,9 @@ const Home = () => {
       }
       {
         update ? <Alert variant="primary" onClose={() => setUpdate("")} dismissible>{update.fname.toUpperCase()} Successfully updated..</Alert> : ""
+      }
+      {
+        deletedata ? <Alert variant="danger" onClose={() => setDeletedata("")} dismissible>{deletedata.fname.toUpperCase()} Successfully Deleted..</Alert> : ""
       }
       <div className="container">
         <div className="main_div">
@@ -159,6 +176,7 @@ const Home = () => {
         </div>
         <Tables
           userdata={userdata}
+          deleteuser={deleteuser}
         />
       </div>
     </>
