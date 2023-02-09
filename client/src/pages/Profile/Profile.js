@@ -66,7 +66,7 @@ const Profile = () => {
               </h4>
               <h4>
                 <i class="fa-solid fa-calendar-days"></i> Date Updated&nbsp;:-
-                <span> {moment(userprofile.dateupdated).format("DD-MM-YYYY / hh:mm:ss")}</span>
+                <span> {moment(userprofile.dateUpdated).format("DD-MM-YYYY / hh:mm:ss")}</span>
               </h4>
             </div>
           </Card.Body>

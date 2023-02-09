@@ -11,7 +11,7 @@ import Tables from "../../components/Tables/Tables";
 
 import { useNavigate } from "react-router-dom";
 import { addData, dltdata, updateData } from "../../components/context/ContextProvider";
-import { deletefunc, usergetfunc } from "../../services/Apis";
+import { deletefunc, exporttocsvfunc, usergetfunc } from "../../services/Apis";
 
 const Home = () => {
 
@@ -57,6 +57,17 @@ const Home = () => {
       toast.error("error")
     }
   }
+
+  const exportuser = async () => {
+    const response = await exporttocsvfunc();
+    if (response.status === 200) {
+      window.open(response.data.downloadUrl, "blank")
+    } else {
+      toast.error("error !")
+    }
+  }
+
+
   useEffect(() => {
     userGet();
     // setTimeout(() => {
@@ -103,7 +114,7 @@ const Home = () => {
 
           <div className="filter_div mt-5 d-flex justify-content-between flex-wrap">
             <div className="export_csv p-3">
-              <Button variant="primary" className="export_btn">
+              <Button variant="primary" className="export_btn" onClick={exportuser}>
                 <i class="fa-solid fa-file-export"></i>&nbsp; Export csv
               </Button>
             </div>
