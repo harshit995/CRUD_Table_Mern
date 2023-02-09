@@ -14,6 +14,9 @@ import { addData, dltdata, updateData } from "../../components/context/ContextPr
 import { deletefunc, usergetfunc } from "../../services/Apis";
 
 const Home = () => {
+
+  const [search, setSearch] = useState("");
+  const [gender, setGender] = useState("All")
   const [userdata, setUserdata] = useState("");
 
   const { useradd, setUseradd } = useContext(addData);
@@ -29,7 +32,7 @@ const Home = () => {
   };
 
   const userGet = async () => {
-    const response = await usergetfunc();
+    const response = await usergetfunc(search, gender);
     // console.log(response)
 
     if (response.status === 200) {
@@ -56,7 +59,7 @@ const Home = () => {
     // setTimeout(() => {
     //   setShowSpin(false);
     // }, 1000);
-  }, []);
+  }, [search, gender]);
 
   return (
     <>
@@ -80,6 +83,7 @@ const Home = () => {
                   placeholder="Search"
                   className="me-2"
                   aria-label="Search"
+                  onChange={(e) => setSearch(e.target.value)}
                 />
                 <Button variant="success " className="search_btn">
                   Search
@@ -109,6 +113,7 @@ const Home = () => {
                     label={"All"}
                     name="gender"
                     value={"All"}
+                    onChange={(e) => setGender(e.target.value)}
                     defaultChecked
                   />
                   <Form.Check
@@ -116,6 +121,7 @@ const Home = () => {
                     label={"Male"}
                     name="gender"
                     value={"Male"}
+                    onChange={(e) => setGender(e.target.value)}
                   />
 
                   <Form.Check
@@ -123,6 +129,7 @@ const Home = () => {
                     label={"Female"}
                     name="gender"
                     value={"Female"}
+                    onChange={(e) => setGender(e.target.value)}
                   />
                 </div>
               </div>
