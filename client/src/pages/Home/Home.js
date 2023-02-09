@@ -187,6 +187,7 @@ const Home = () => {
         <Tables
           userdata={userdata}
           deleteuser={deleteuser}
+          userGet={userGet}
         />
       </div>
     </>

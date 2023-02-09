@@ -62,11 +62,11 @@ const Profile = () => {
               </h4>
               <h4>
                 <i class="fa-solid fa-calendar-days"></i> Date created&nbsp;:-
-                <span> {moment(userprofile.datecreated).format("DD - MM - YYYY")}</span>
+                <span> {moment(userprofile.datecreated).format("DD - MM - YYYY / hh:mm:ss")}</span>
               </h4>
               <h4>
                 <i class="fa-solid fa-calendar-days"></i> Date Updated&nbsp;:-
-                <span> {userprofile.dateupdated}</span>
+                <span> {moment(userprofile.dateupdated).format("DD-MM-YYYY / hh:mm:ss")}</span>
               </h4>
             </div>
           </Card.Body>

@@ -103,3 +103,15 @@ exports.userdelete = async (req, res) => {
         console.log("error..")
     }
 }
+
+exports.useractivity = async (req, res) => {
+    const { id } = req.params;
+    const { data } = req.body;
+
+    try {
+        const userstatusupdate = await users.findByIdAndUpdate({ _id: id }, { activity: data }, { new: true });
+        res.status(200).json(userstatusupdate)
+    } catch (error) {
+        res.status(401).json(error)
+    }
+}

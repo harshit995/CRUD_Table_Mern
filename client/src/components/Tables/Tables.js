@@ -7,10 +7,22 @@ import Table from "react-bootstrap/Table";
 import Dropdown from "react-bootstrap/Dropdown";
 import Badge from "react-bootstrap/Badge";
 import { NavLink } from "react-router-dom";
+import { statuschangefunc } from "../../services/Apis";
+import { toast, ToastContainer } from "react-toastify";
 
-const Tables = ({ userdata, deleteuser }) => {
+const Tables = ({ userdata, deleteuser, userGet }) => {
 
 
+  const handleChange = async (id, activity) => {
+    const response = await statuschangefunc(id, activity);
+
+    if (response.status === 200) {
+      userGet();
+      toast.success("Status Updated")
+    } else {
+      toast.error("error ")
+    }
+  }
   return (
     <>
       <div className="container">
@@ -46,8 +58,8 @@ const Tables = ({ userdata, deleteuser }) => {
                                 </Badge>
                               </Dropdown.Toggle>
                               <Dropdown.Menu>
-                                <Dropdown.Item>Active</Dropdown.Item>
-                                <Dropdown.Item>InActive</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handleChange(element._id, "Active")}>Active</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handleChange(element._id, "InActive")}>InActive</Dropdown.Item>
                               </Dropdown.Menu>
                             </Dropdown>
                           </td>
@@ -109,6 +121,7 @@ const Tables = ({ userdata, deleteuser }) => {
             </Card>
           </div>
         </Row>
+        <ToastContainer />
       </div >
     </>
   );
