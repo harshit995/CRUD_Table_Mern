@@ -37,6 +37,8 @@ exports.userpost = async (req, res) => {
 exports.userget = async (req, res) => {
     const search = req.query.search || ""
     const gender = req.query.gender || ""
+    const activity = req.query.activity || ""
+    const sort = req.query.sort || ""
 
     const query = {
         fname: { $regex: search, $options: "i" }
@@ -44,9 +46,12 @@ exports.userget = async (req, res) => {
     if (gender != "All") {
         query.gender = gender
     }
+    if (activity != "All") {
+        query.activity = activity
+    }
     try {
         console.log(req.query)
-        const usersdata = await users.find(query);
+        const usersdata = await users.find(query).sort({ datecreated: sort == "new" ? -1 : 1 });
         res.status(200).json(usersdata)
     } catch (error) {
         res.status(401).json(error)

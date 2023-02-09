@@ -17,6 +17,9 @@ const Home = () => {
 
   const [search, setSearch] = useState("");
   const [gender, setGender] = useState("All")
+  const [activity, setActivity] = useState("All")
+  const [sort, setSort] = useState("new")
+
   const [userdata, setUserdata] = useState("");
 
   const { useradd, setUseradd } = useContext(addData);
@@ -32,7 +35,7 @@ const Home = () => {
   };
 
   const userGet = async () => {
-    const response = await usergetfunc(search, gender);
+    const response = await usergetfunc(search, gender, activity, sort);
     // console.log(response)
 
     if (response.status === 200) {
@@ -59,7 +62,7 @@ const Home = () => {
     // setTimeout(() => {
     //   setShowSpin(false);
     // }, 1000);
-  }, [search, gender]);
+  }, [search, gender, activity, sort]);
 
   return (
     <>
@@ -143,8 +146,8 @@ const Home = () => {
                   <i class="fa-solid fa-sort"></i>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item>New</Dropdown.Item>
-                  <Dropdown.Item>Old</Dropdown.Item>
+                  <Dropdown.Item onClick={() => setSort("new")}>New</Dropdown.Item>
+                  <Dropdown.Item onClick={() => setSort("old")}>Old</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>
@@ -159,7 +162,7 @@ const Home = () => {
                     label={`All`}
                     name="activity"
                     value={"All"}
-                    // onChange={(e) => setactivity(e.target.value)}
+                    onChange={(e) => setActivity(e.target.value)}
                     defaultChecked
                   />
                   <Form.Check
@@ -167,14 +170,14 @@ const Home = () => {
                     label={`Active`}
                     name="activity"
                     value={"Active"}
-                  // onChange={(e) => setactivity(e.target.value)}
+                    onChange={(e) => setActivity(e.target.value)}
                   />
                   <Form.Check
                     type={"radio"}
                     label={`InActive`}
                     name="activity"
                     value={"InActive"}
-                  // onChange={(e) => setactivity(e.target.value)}
+                    onChange={(e) => setActivity(e.target.value)}
                   />
                 </div>
               </div>
