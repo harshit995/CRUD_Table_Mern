@@ -43,7 +43,6 @@ const Home = () => {
     } else {
       console.log("error for get user..")
     }
-
   }
 
   //user delete
@@ -99,7 +98,7 @@ const Home = () => {
                   aria-label="Search"
                   onChange={(e) => setSearch(e.target.value)}
                 />
-                <Button variant="success " className="search_btn">
+                <Button variant="danger" className="search_btn">
                   Search
                 </Button>
               </Form>
